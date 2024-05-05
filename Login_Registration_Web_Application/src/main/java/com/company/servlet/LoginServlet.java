@@ -1,7 +1,7 @@
 package com.company.servlet;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
+//import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,15 +17,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String userpassword = request.getParameter("password");
-//        if (userDao.isValidUser(username, userpassword)) {
-//            HttpSession session = request.getSession();
-//            session.setAttribute("username", username);
-//            response.sendRedirect("welcome.jsp");
-//        } 
-        if (username.equals("ashum")) {
-			response.sendRedirect("welcome.jsp");
-		}
-        else {
+        if (userDao.isValidUser(username, userpassword)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
+            response.sendRedirect("welcome.jsp");
+        }else {
             response.sendRedirect("login.jsp?error=1");
             System.out.println("ERROR");
         }
